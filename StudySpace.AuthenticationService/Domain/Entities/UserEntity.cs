@@ -1,5 +1,4 @@
-﻿using Domain.ValidationRules;
-using System.Text.RegularExpressions;
+﻿using Domain.Guards;
 
 namespace Domain.Entities;
 public class UserEntity : BaseEntity
@@ -14,8 +13,7 @@ public class UserEntity : BaseEntity
 
     public static UserEntity Create(string email, string passwordHash)
     {
-        if (string.IsNullOrWhiteSpace(email) || !Regex.IsMatch(email, RegularExpressionsForValidation.EmailRegex))
-            throw new ArgumentException("Email is not valid", nameof(email));
+        UserGuards.EnsureEmailIsValid(email);
 
         if (string.IsNullOrWhiteSpace(passwordHash))
             throw new ArgumentException("Password hash is required", nameof(passwordHash));

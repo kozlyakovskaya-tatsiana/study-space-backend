@@ -1,4 +1,4 @@
-﻿namespace Domain.ValidationRules;
+﻿namespace Domain.Guards;
 
 internal static class RegularExpressionsForValidation
 {
