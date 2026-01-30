@@ -4,16 +4,16 @@ namespace Domain.Tests;
 
 public class UserEntityTests
 {
+    private const string Email = "user@example.com";
+    private const string PasswordHash = "hashedpassword";
+
     [Fact]
     public void Create_ValidEmailAndPasswordHash_ReturnsUserEntity()
     {
-        const string email = "user@example.com";
-        const string passwordHash = "hashedpassword";
+        var user = UserEntity.Create(Email, PasswordHash);
 
-        var user = UserEntity.Create(email, passwordHash);
-
-        Assert.Equal(email, user.Email);
-        Assert.Equal(passwordHash, user.PasswordHash);
+        Assert.Equal(Email, user.Email);
+        Assert.Equal(PasswordHash, user.PasswordHash);
         Assert.NotNull(user.Roles);
         Assert.NotNull(user.RefreshTokens);
     }
