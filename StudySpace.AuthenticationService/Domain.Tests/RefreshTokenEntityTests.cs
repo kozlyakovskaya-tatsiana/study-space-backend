@@ -4,21 +4,21 @@ namespace Domain.Tests;
 
 public class RefreshTokenEntityTests
 {
-    public readonly string Token = "token123";
-    public readonly UserEntity User = UserEntity.Create("User@example.com", "hash");
+    private const string Token = "token123";
+    private readonly UserEntity _user = UserEntity.Create("User@example.com", "hash");
 
     [Fact]
     public void Create_ValidArguments_ReturnsRefreshTokenEntity()
     {
         var expiresAt = DateTime.UtcNow.AddMinutes(10);
 
-        var refreshToken = RefreshTokenEntity.Create(User, Token, expiresAt);
+        var refreshToken = RefreshTokenEntity.Create(_user, Token, expiresAt);
 
         Assert.Equal(Token, refreshToken.Token);
         Assert.Equal(expiresAt, refreshToken.ExpiresAt);
         Assert.False(refreshToken.IsRevoked);
-        Assert.Equal(User.Id, refreshToken.UserId);
-        Assert.Equal(User, refreshToken.User);
+        Assert.Equal(_user.Id, refreshToken.UserId);
+        Assert.Equal(_user, refreshToken.User);
     }
 
     [Fact]
@@ -37,7 +37,7 @@ public class RefreshTokenEntityTests
     {
         var expiresAt = DateTime.UtcNow.AddMinutes(10);
 
-        Assert.Throws<ArgumentException>(() => RefreshTokenEntity.Create(User, invalidToken, expiresAt));
+        Assert.Throws<ArgumentException>(() => RefreshTokenEntity.Create(_user, invalidToken, expiresAt));
     }
 
     [Fact]
@@ -45,14 +45,14 @@ public class RefreshTokenEntityTests
     {
         var expiresAt = DateTime.UtcNow.AddSeconds(-1);
 
-        Assert.Throws<ArgumentException>(() => RefreshTokenEntity.Create(User, Token, expiresAt));
+        Assert.Throws<ArgumentException>(() => RefreshTokenEntity.Create(_user, Token, expiresAt));
     }
 
     [Fact]
     public void Revoke_SetsIsRevokedTrue()
     {
         var expiresAt = DateTime.UtcNow.AddMinutes(10);
-        var refreshToken = RefreshTokenEntity.Create(User, Token, expiresAt);
+        var refreshToken = RefreshTokenEntity.Create(_user, Token, expiresAt);
 
         refreshToken.Revoke();
 
