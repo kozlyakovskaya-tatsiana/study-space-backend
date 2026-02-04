@@ -2,7 +2,7 @@
 
 namespace Application.Abstractions.Services;
 
-public interface IAuthService
+public interface ITokenService
 {
     string GenerateAccessToken(UserEntity user);
     string GenerateRefreshToken();
