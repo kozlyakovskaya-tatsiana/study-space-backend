@@ -8,10 +8,10 @@ public class UserEntity : BaseEntity
     public string Email { get; private set; }
     public string PasswordHash { get; private set; }
 
-    private List<UserRoleEntity> _roles;
-    public IReadOnlyCollection<UserRoleEntity> Roles => _roles.AsReadOnly();
+    private List<UserRoleEntity> _roles = new ();
+    public IReadOnlyCollection<UserRoleEntity> UserRoles => _roles.AsReadOnly();
 
-    private List<RefreshTokenEntity> _refreshTokens;
+    private List<RefreshTokenEntity> _refreshTokens = new ();
     public IReadOnlyCollection<RefreshTokenEntity> RefreshTokens => _refreshTokens.AsReadOnly();
 
     private UserEntity() { }

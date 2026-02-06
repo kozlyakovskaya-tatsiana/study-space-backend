@@ -9,6 +9,6 @@ public interface IRepository<TEntity> where TEntity : class
     Task CreateAsync(TEntity entity, CancellationToken cancellationToken = default);
     void Update(TEntity entity);
     void Remove(TEntity entity);
-    Task<bool> ExistsAsync(Expression<Func<TEntity, bool>>? predicate = null, CancellationToken cancellationToken = default);
+    Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> predicate, CancellationToken cancellationToken = default);
     Task SaveChangesAsync(CancellationToken cancellationToken = default);
 }

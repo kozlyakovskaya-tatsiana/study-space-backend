@@ -1,3 +1,3 @@
 ﻿namespace Domain.Exceptions;
 
-public class NoEntityFoundException(string message) : DomainException(message);
+public class NoResourceFoundException(string message) : DomainException(message);

@@ -28,14 +28,14 @@ public sealed class LoginUserHandler(
 
         if (user is null)
         {
-            throw new NoEntityFoundException($"There is no user with email ${request.Email}");
+            throw new NoResourceFoundException($"There is no user with email ${request.Email}");
         }
 
         var isPasswordValid =
             await passwordHasher.VerifyPasswordAsync(request.Password, user.PasswordHash!, cancellationToken);
 
         if (!isPasswordValid)
-            throw new NoEntityFoundException("There is no user with such phoneNumber and password.");
+            throw new NoResourceFoundException("There is no user with such phoneNumber and password.");
 
         var accessToken = tokenService.GenerateAccessToken(user);
         var refreshToken = tokenService.GenerateRefreshToken();

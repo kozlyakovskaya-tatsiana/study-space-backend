@@ -14,7 +14,7 @@ public class UserEntityTests
 
         Assert.Equal(Email, user.Email);
         Assert.Equal(PasswordHash, user.PasswordHash);
-        Assert.NotNull(user.Roles);
+        Assert.NotNull(user.UserRoles);
         Assert.NotNull(user.RefreshTokens);
     }
 
